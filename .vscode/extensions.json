@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "ms-vscode-remote.remote-containers",
+    "ms-azuretools.vscode-docker",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "github.vscode-github-actions",
+    "xabikos.javascriptsnippets",
+    "orta.vscode-jest",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "fill-labs.dependi"
+  ]
+}
