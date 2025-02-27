@@ -1,10 +1,12 @@
 FROM node:current-slim AS base
+
+FROM base as build-base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 # Install dependencies only when needed
-FROM base AS deps
+FROM build-base AS deps
 # RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -12,7 +14,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed
-FROM base AS builder
+FROM build-base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -20,7 +22,7 @@ COPY . .
 RUN pnpm run build
 
 # Production image, copy all the files and run next
-FROM node:current-slim AS runner
+FROM base AS runner
 WORKDIR /app
 
 ENV PORT=3000
