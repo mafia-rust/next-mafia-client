@@ -1,0 +1,9 @@
+{
+  "name": "Next Mafia Client",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [3000],
+  "mounts": ["source=pnpm-store,type=volume,target=/pnpm/store"],
+  "postAttachCommand": "pnpm config set store-dir /pnpm/store && pnpm install"
+}
